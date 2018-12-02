@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Timeline with date - Bootsnipp.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="產品營運.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+    
+:root {
+	--white: #ffffff;
+	--black: #000000;
+	--blue:#0288d1;
+	--gray:#ebebeb;
+	--box-shadow1:0px 0px 18px 2px rgba(10, 55, 90, 0.15);
+}
+body{
+	font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    color: #637280;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+:focus{
+    outline: 0px solid transparent !important;
+}
+.timeline {
+    padding: 50px 0;
+    position: relative;
+}
+.timeline-nodes {
+        padding-bottom: 25px;
+        position: relative;
+    }
+.timeline-nodes:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.timeline h3, .timeline p {
+    padding: 5px 15px;
+} 
+.timeline h3{
+    font-weight: lighter;
+    background: var(--blue);
+}
+.timeline p, .timeline time {
+    color: var(--blue)
+}
+.timeline::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    border-left: 2px dashed var(--blue);
+    height: 100%;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+.timeline-content {
+    border: 1px solid var(--blue);
+    position: relative;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 3px 25px 0px rgba(10, 55, 90, 0.2)
+}
+.timeline-nodes:nth-child(odd) h3,
+.timeline-nodes:nth-child(odd) p {
+    text-align: right;
+}
+.timeline-nodes:nth-child(odd) .timeline-date {
+    text-align: left;
+}
+ 
+.timeline-nodes:nth-child(even) .timeline-date {
+    text-align: right;
+}
+.timeline-nodes:nth-child(odd) .timeline-content::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 100%;
+    width: 0;
+    border-left: 10px solid var(--blue);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.timeline-nodes:nth-child(even) .timeline-content::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    right: 100%;
+    width: 0;
+    border-right: 10px solid var(--blue);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.timeline-image {
+    position: relative;
+    z-index: 100;
+}
+.timeline-image::before {
+    content: "";
+    width: 80px;
+    height: 80px;
+    border: 2px dashed var(--blue);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    z-index: 1;
+    
+
+}
+.timeline-image img {
+    position: relative;
+    z-index: 100;
+}
+/*small device style*/
+
+@media (max-width: 767px) {
+    .timeline-nodes:nth-child(odd) h3,
+    .timeline-nodes:nth-child(odd) p {
+    text-align: left
+}
+.timeline-nodes:nth-child(even) {
+    flex-direction: row;
+}
+    .timeline::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 4%;
+    width: 0;
+    border-left: 2px dashed var(--blue);
+    height: 100%;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+.timeline h3 {
+    font-size: 1.7rem;
+}
+.timeline p {
+    font-size: 14px;
+}
+.timeline-image {
+    position: absolute;
+    left: 0%;
+    top: 60px;
+    /*transform: translateX(-50%;);*/
+}
+.timeline-nodes:nth-child(odd) .timeline-content::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: auto;
+    right: 100%;
+    width: 0;
+    border-left: 0;
+    border-right: 10px solid var(--blue);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.timeline-nodes:nth-child(even) .timeline-content::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    right: 100%;
+    width: 0;
+    border-right: 10px solid var(--blue);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.timeline-nodes:nth-child(even) .timeline-date {
+    text-align: left;
+}
+.timeline-image::before {
+    width: 65px;
+    height: 65px;
+}
+}
+
+/*extra small device style */
+@media (max-width: 575px) {
+    .timeline::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 3%;
+}
+.timeline-image {
+    position: absolute;
+    left: -5%;
+    }
+.timeline-image::before {
+    width: 60px;
+    height: 60px;
+}
+}
+
+
+    </style>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
+            else $('head > link').filter(':first').replaceWith(defaultCSS); 
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height()); 
+          window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="timeline">
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+            <h3 class=" text-light text-center">上線前置作業</h3>
+            <ul class="list-unstyled">
+              <li><span class="badge badge-light">NO.1</span>開始招募【寶實潔】至30人 </li>
+              <li><span class="badge badge-light">NO.2</span>確認【平台】&【人力】法律規範</li>
+			  <li><span class="badge badge-light">NO.3</span>送審【第三方支付】綠界或智付通</li>
+              <li><span class="badge badge-light">NO.4</span>初期行銷主題規劃</li>
+              <li><span class="badge badge-light">NO.5</span>潔達人工作流程規範 </li>
+              <li><span class="badge badge-light">NO.6</span>客戶服務流程規範 </li>
+			  <li><span class="badge badge-light">NO.7</span>確認【延期&取消】規範</li>
+			  <li><span class="badge badge-light">NO.8</span>確認【客戶通知信件】內容</li>
+			  <li><span class="badge badge-light">NO.9</span>進行【消費者前台】單元測試</li>
+			  <li><span class="badge badge-light">NO.10</span>進行【阿姨APP】單元測試</li>
+			  <li><span class="badge badge-light">NO.11</span>進行【管理者後台】單元測試</li>
+			  
+            </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2018.12.01 ~ 2018.12.31</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+            <h3 class=" text-light text-center">上線前置作業</h3>
+            <ul class="list-unstyled">
+			  <li><span class="badge badge-light">NO.1</span>持續招募【寶實潔】至30人</li>
+			  <li><span class="badge badge-light">NO.2</span>【寶實潔】的工作制服</li>
+              <li><span class="badge badge-light">NO.3</span>完成【平台】&【人力】法律規範</li>
+			  <li><span class="badge badge-light">NO.4</span>完成【第三方】簽約合作</li>
+			  <li><span class="badge badge-light">NO.5</span>完成【責任險】&【雇主險】簽約</li>
+			  <li><span class="badge badge-light">NO.6</span>決定【一名全職潔達人種子】</li>
+			  <li><span class="badge badge-light">NO.7</span>【潔達人種子】技能面試規範</li>			 
+              <li><span class="badge badge-light">NO.8</span>【潔達人種子】清潔流程規範</li>
+			  <li><span class="badge badge-light">NO.9</span>完成所有【潔達人】簽約合作</li>
+			  <li><span class="badge badge-light">NO.10</span>進行【消費者前台】整合測試</li>
+			  <li><span class="badge badge-light">NO.11</span>進行【阿姨APP】整合測試</li>
+			  <li><span class="badge badge-light">NO.12</span>進行【管理者後台】整合測試</li>
+			  <li><span class="badge badge-light">NO.13</span>潔達人資料及班表上架</li>
+			  <li><span class="badge badge-light">NO.14</span>招募【客服PM10點~AM6點】</li>
+            </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2019.1.01 ~ 2019.1.15</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+            <h3 class=" text-light text-center">1/15產品上線<br>預期訂單100張</h3>
+            <ul class="list-unstyled mt-3 mb-4 text-left">
+              <li><span class="badge badge-light">NO.1</span>【口袋名單】預期佔50%訂單</li>
+			  <li><span class="badge badge-light">NO.2</span>【鐘點清潔】預期佔49%訂單</li>
+              <li><span class="badge badge-light">NO.3</span>【定期清潔】預期佔1%訂單</li>
+			  <li><span class="badge badge-light">NO.4</span>開始招募【e訂潔_個人】至20人</li>
+			  <li><span class="badge badge-light">NO.5</span>開始招募【e訂潔_企業】至5家</li>
+			  <li><span class="badge badge-light">NO.6</span>進行【首月營運】問題分析</li>
+			  <li><span class="badge badge-light">NO.7</span>分析人力&系統增量可否至3倍負荷</li>
+            </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+             <time>2019.1.15 ~ 2019.2.15</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+             <h3 class=" text-light text-center">產品營運<br>預期訂單300張</h3>
+			<ul class="list-unstyled mt-3 mb-4 text-left">
+			  <li><span class="badge badge-light">NO.1</span>【口袋名單】預期佔20%訂單</li>
+			  <li><span class="badge badge-light">NO.2</span>【鐘點清潔】預期佔65%訂單</li>
+              <li><span class="badge badge-light">NO.3</span>【定期清潔】預期佔5%訂單</li>
+			  <li><span class="badge badge-light">NO.8</span>【辦公室&營業場所】5%<span class="badge badge-primary">New服務</span></li>
+              <li><span class="badge badge-light">NO.9</span>【收納服務】5%<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.10</span>【加購除塵蟎】5%<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.1</span>持續招募【e訂潔_個人】至20人</li>
+			  <li><span class="badge badge-light">NO.2</span>持續招募【e訂潔_企業】至5家</li>
+			  <li><span class="badge badge-light">NO.3</span>開放供應商自行上架功能</li>
+			  <li><span class="badge badge-light">NO.4</span>開放手機自行排班功能</li>
+			  <li><span class="badge badge-light">NO.5</span>消費者前台網站全新改版</li>
+			  </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2019.2.15 ~ 2019.3.15</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+            <h3 class=" text-light text-center">產品營運<br>預期訂單600張</h3>
+			<ul class="list-unstyled mt-3 mb-4 text-left">
+			  <li><span class="badge badge-light">NO.1</span>【口袋名單】預期佔15%訂單</li>
+			  <li><span class="badge badge-light">NO.2</span>【鐘點清潔】預期佔65%訂單</li>
+              <li><span class="badge badge-light">NO.3</span>【定期清潔】預期佔5%訂單</li>
+			  <li><span class="badge badge-light">NO.4</span>【辦公室&營業場所】5%</li>
+              <li><span class="badge badge-light">NO.5</span>【收納服務】預期佔5%訂單</li>
+			  <li><span class="badge badge-light">NO.6</span>【加購除塵蟎】預期佔5%訂單</li>
+			  <li><span class="badge badge-light">NO.7</span>【抽油煙機】2%<span class="badge badge-primary">New服務</span></li>
+              <li><span class="badge badge-light">NO.8</span>【洗衣機清潔】2%<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.9</span>【冷氣機清潔】1%<span class="badge badge-primary">New服務</span></li>
+			 </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2019.3.15 ~ 2019.4.15</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+			<h3 class=" text-light text-center">產品營運<br>穩定流量保持成長</h3>
+			<ul class="list-unstyled mt-3 mb-4 text-left">
+              <li><span class="badge badge-light">NO.1</span>目前定價機制,每張單獲利約為20%</li>
+              <li><span class="badge badge-light">NO.2</span>估算行銷成本應佔其中10%</li>
+            </ul>
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2019.4.15 ~ 2019.5.15</time>
+          </div>
+        </div>
+        <div class="row no-gutters justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+          <div class="col-10 col-md-5 order-3 order-md-1 timeline-content">
+            <h3 class=" text-light text-center">產品營運<br>與競業服務區隔化</h3>
+			<ul class="list-unstyled mt-3 mb-4 text-left">
+              <li><span class="badge badge-light">NO.1</span>販售【清潔用品】<span class="badge badge-primary">New服務</span></li>
+              <li><span class="badge badge-light">NO.2</span>【鞋類送洗】<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.3</span>【寵物照護】<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.4</span>【美甲美髮】<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.5</span>【手機貼膜】<span class="badge badge-primary">New服務</span></li>
+			  <li><span class="badge badge-light">NO.6</span>【手機貼膜】<span class="badge badge-primary">New服務</span></li>
+			</ul>  
+          </div>
+          <div class="col-2 col-sm-1 px-md-3 order-2 timeline-image text-md-center">
+            &nbsp;
+          </div>
+          <div class="col-10 col-md-5 order-1 order-md-3 py-3 timeline-date">
+            <time>2019.5.15 ~ 2019.6.15</time>
+          </div>
+        </div>		
+      </div>
+    </div>	<script type="text/javascript">
+		</script>
+</body>
+</html>
